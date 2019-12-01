@@ -12,6 +12,7 @@ let {c,a,...b} = {a:1,b:2,c:'20'}
 console.log(b);
 
 
+
 //async await Promise
 let a = async ()=>{
     await new Promise(resolve=>{

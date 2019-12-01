@@ -6,7 +6,7 @@ class Dep {
     addSub(watcher) {
         this.subs.push(watcher);
     }
-    //发布
+    //发布 
     notify() {
         this.subs.forEach(watcher => watcher.update());
     }
