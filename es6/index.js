@@ -2,9 +2,12 @@
 let [, a, b, c] = [1, 2, 3, 4, 5]
 console.log(a, b, c);
 a = [1, ...[2, 3]]
+[a,b=4] = [1]
+console.log(a,b);
+
 console.log(a);
 [a, b] = [1, 2, 3]
-let { a: c, b } = { a: 'feng', b: 12 };
+let { a: c, b=20 } = { a: 'feng', b: 12 };
 console.log( b, c);
 let a = {...{a:1},...{b:2}}
 console.log(a);

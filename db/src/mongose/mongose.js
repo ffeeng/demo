@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://118.190.99.85/local', { useUnifiedTopology: true ,useNewUrlParser: true});
 
 const Cat = mongoose.model('Cat', { name: String });
 
