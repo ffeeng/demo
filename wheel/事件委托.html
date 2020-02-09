@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<ul id="ul">
+    <li>1</li>
+    <li>ab</li>
+    <li><input type="text"></li>
+</ul>
+
+
+<script>
+    let ul = document.querySelector('#ul')
+    ul.addEventListener('click', (event) => {
+        console.log("ul 事件委托", event.target);
+    });
+
+</script>
+
+</body>
+</html>

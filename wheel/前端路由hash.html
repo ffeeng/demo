@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="事件参数.html">事件参数</a>
+
+<script>
+    //#hash不向后端发请求 不进去http报文
+    // hashchange函数调用 hash即#后面的字符串，hash改变就会触发
+    window.onhashchange = function (e) {
+        console.log(e);
+        // newURL: "http://localhost:63342/demo/wheel/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1hash.html?#2"
+        // oldURL: "http://localhost:63342/demo/wheel/%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1hash.html?#1"
+    }
+
+    window.onpopstate = function (...a) {
+        console.log(...a);
+    }
+</script>
+
+</body>
+</html>

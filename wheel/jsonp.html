@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<script src="http://domain/api?param1=a&param2=b&callback=cb"></script>
+<script>
+    function cb(data) {
+        console.log(data)
+    }
+
+    function jsonp(url, param, jsonpCallback, cb) {
+        param.jsonpCallback = jsonpCallback;
+        param = Object.entries(param).map(item => {
+            let [k, v] = item;
+            return `${k}=${v}`
+        }).join('&');
+
+        let script = document.createElement('script');
+        script.src = url + '?' + param;
+        window[jsonpCallback] = function () {
+            cb && cb();
+        }
+    }
+</script>
+</body>
+</html>
