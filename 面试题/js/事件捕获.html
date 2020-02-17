@@ -6,9 +6,11 @@
 </head>
 <body>
 
-<div id="s1">s1
-    <div id="s2">s2</div>
+<div id="parent">parent
+    <div id="child">child</div>
 </div>
+<style>
+</style>
 
 <script>
     // AddEventListenerOptions事件参数的默认值
@@ -16,14 +18,14 @@
         once: false,  // 只条用一次
         capture: false, //事件冒泡
         passive: false  //事件继续传递
-    }
+    };
 
     //capture =true //默认值是false passive
-    s1.addEventListener("click", function (e) {
-        console.log("s1 捕获事件");
+    parent.addEventListener("dblclick", function (e) {
+        console.log("parent 捕获事件");
     }, true);
-    s2.addEventListener("click", function (e) {
-        console.log("s2 捕获事件");
+    child.addEventListener("click", function (e) {
+        console.log("child 捕获事件");
     }, {passive: false});
 </script>
 

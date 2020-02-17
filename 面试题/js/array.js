@@ -56,6 +56,8 @@ Array.prototype._map = new MyArray()._map;
 Array.prototype._filter = new MyArray()._filter;
 Array.prototype._some = new MyArray()._some;
 Array.prototype._every = new MyArray()._every;
+// reduce(callbackfn: (previousValue: T, currentValue: T, currentIndex: number, array: T[]) => T, initialValue: T): T;
+//reduce函数传入是个参数 pre cur index arr
 Array.prototype._reduce = new MyArray()._reduce;
 // Array.prototype._forEach = new MyArray()._forEach;
 // [1, 2]._forEach((value, index, array) => console.log(value, index, array));
@@ -69,3 +71,4 @@ a.
 for(let key in a.__proto__)
     console.log(key);
 console.dir(a.__proto__)
+[].reduce()
