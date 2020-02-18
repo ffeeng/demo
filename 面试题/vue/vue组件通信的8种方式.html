@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        li {
+            list-style-type: decimal;
+        }
+    </style>
+</head>
+<body>
+<p>vue组件通信8种方式</p>
+<ul>
+    <li>props emit</li>
+    <li>$parent $children</li>
+    <li>$refs(ref="a")</li>
+    <li>provide inject</li>
+    <li>eventBus(基于vue实列的emit on方法)</li>
+    <li>$attrs $listeners</li>
+    <li>Vuex</li>
+    <li>localStorage / sessionStorage</li>
+</ul>
+<div id="app">
+    <div ref="aa">父亲有500，给了孩子{{money}}</div>
+    <child :m="money" :name="'ffeeng'" :age="20" title="组件通信" @money-change="changeMoney" @add="changeMoney"></child>
+</div>
+<!--template有两种写法 id要加到最外层-->
+<script type="x-template" id="aa">
+    <div>
+        <div>孩子有{{m}}</div>
+        <button @click="askMoreMoney">少了，我要200</button>
+    </div>
+</script>
+<template id="ab">
+    <div>123</div>
+</template>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    let eventBus = new Vue();
+    let child = {
+        template: '#aa', //不能用class,因为class不能保证唯一
+        props: ['m'],
+        inject: ['pData'],
+        data() {
+            return {};
+        },
+        methods: {
+            askMoreMoney() {
+                //注意emit发射的事件名不能有大写 因为到html页面小写全转成了小写
+                // this.$emit('money-change', 200);
+                eventBus.$emit('add', {num: 1})
+            }
+        },
+        ([]).push(1);
+        created() {
+            console.log(this.pData);
+        },
+        mounted() {
+            console.log(this);
+        }
+
+    };
+    let vm = new Vue({
+        el: '#app',
+        provide: {
+            pData: [123],
+            for: 123,
+        },
+        components: {
+            child
+        },
+        data() {
+            return {money: 100}
+        },
+        methods: {
+            changeMoney(val) {
+                this.money = val;
+            }
+        },
+        created() {
+            console.log(this.$attrs);
+            eventBus.$on('add', a => {
+                console.log(a);
+            })
+        }
+    })
+</script>
+</body>
+</html>

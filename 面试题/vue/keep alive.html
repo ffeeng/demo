@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    const state = Vue.observable({count: 0})
+    let vm = new Vue({
+        el: '#app',
+        render(h) {
+            //h函数中的三个参数  h(tag,vnode,textNode}
+            return h('button', {
+                class: 'a b',
+                style: {width: '200px'},
+                on: {
+                    click: () => {
+                        state.count++
+                    }
+                }
+            }, `count is: ${state.count}`)
+        }
+    })
+</script>
+</body>
+</html>

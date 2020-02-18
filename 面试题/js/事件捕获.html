@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="parent">parent
+    <div id="child">child</div>
+</div>
+<style>
+</style>
+
+<script>
+    // AddEventListenerOptions事件参数的默认值
+    let option = {
+        once: false,  // 只条用一次
+        capture: false, //事件冒泡
+        passive: false  //事件继续传递
+    };
+
+    //capture =true //默认值是false passive
+    parent.addEventListener("dblclick", function (e) {
+        console.log("parent 捕获事件");
+    }, true);
+    child.addEventListener("click", function (e) {
+        console.log("child 捕获事件");
+    }, {passive: false});
+</script>
+
+</body>
+</html>

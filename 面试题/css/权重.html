@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>CSS权重计算规则</div>
+<ul>
+    <li><span>通配符</span> <span>0</span></li>
+    <li><span>伪元素、标签</span> <span>1</span></li>
+    <li><span>类、伪类、属性</span> <span>10</span></li>
+    <li><span>id</span> <span>100</span></li>
+    <li><span>行内</span> <span>1000</span></li>
+    <li><span>!important</span> <span>Infinity</span></li>
+</ul>
+<style>
+    ul {
+        list-style-type: decimal;
+    }
+
+    li > span:nth-of-type(1) {
+        width: 150px;
+        display: inline-block;
+    }
+</style>
+</body>
+</html>

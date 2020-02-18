@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <compa></compa>
+    <compb></compb>
+</div>
+<template id="a">
+    <div>
+        <div>{{receiveData}}</div>
+        <button @click="clickHandle">点我让B接收数据</button>
+    </div>
+</template>
+
+<template id="b">
+    <div>
+        <div>{{receiveData}}</div>
+        <button @click="clickHandle">点我让A接收数据</button>
+    </div>
+</template>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="../../node_modules/vuex/dist/vuex.js"></script>
+<script>
+    Vue.use(Vuex);
+    const store = new Vuex.Store({
+        state: {
+            msg: 'hello'
+        },
+        mutations: {
+            changeMsg(oldValue, newValue) {
+                this.state.msg = newValue;
+            }
+        }
+    });
+    const compa = {
+        data() {
+            return {msg: '我是A'};
+        },
+        store,
+        template: `#a`,
+        methods: {
+            clickHandle() {
+                this.$store.commit('changeMsg', 'hello B, 我是A')
+            }
+        },
+        computed: {
+            receiveData() {
+                return this.$store.state.msg;
+            }
+        }
+    };
+    const compb = {
+        data() {
+            return {msg: '我是B'};
+        },
+        store,
+        template: '#b',
+        methods: {
+            clickHandle() {
+                this.$store.commit('changeMsg', 'hello A, 我是B')
+            }
+        },
+        computed: {
+            receiveData() {
+                return this.$store.state.msg;
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        components: {
+            compa,
+            compb,
+            // child2,
+        },
+        data() {
+            return {}
+        },
+        methods: {},
+        mounted() {
+
+        }
+    })
+
+</script>
+</body>
+</html>

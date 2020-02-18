@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sort {
+            width: 230px;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .item {
+            color: white;
+            text-align: center;
+            margin-left: 20px;
+            width: 25px;
+            background-color: green;
+
+        }
+
+        .active {
+            background-color: blue;
+            transition-property: background-color;
+            transition-duration: 1s;
+            transition-delay: 0s;
+            transition-timing-function: ease;
+            /*animation: activeAnimate 1s linear;*/
+        }
+
+        @keyframes activeAnimate {
+            from {
+                background-color: green
+            }
+            to {
+                background-color: blue
+            }
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <div>
+        <div class="sort">
+            <div :key="i.val" v-for="i of bubbleArr" :style="{height:i.val*50+'px'}"
+                 :class="{active:i.active,item:true}">
+                {{i.val}}
+            </div>
+
+        </div>
+        <div>冒泡排序算法实现</div>
+        <input type="text" v-model="time">
+        <button @click="start=!start">{{start?'停止':"开始"}}</button>
+    </div>
+    <div>
+        <div class="sort">
+            <div :key="i.val" v-for="i of selectArr" :style="{height:i.val*50+'px'}"
+                 :class="{active:i.active,item:true}">
+                {{i.val}}
+            </div>
+        </div>
+        <div>选择排序算法实现</div>
+        <input type="text" v-model="time">
+        <button @click="start=!start">{{start?'停止':"开始"}}</button>
+    </div>
+</div>
+
+<script src="../../es6/node_modules/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                bubbleArr: [
+                    {val: 5, active: false},
+                    {val: 4, active: false},
+                    {val: 2, active: false},
+                    {val: 1, active: false},
+                    {val: 3, active: false},
+                ],
+                selectArr: [
+                    {val: 5, active: false},
+                    {val: 4, active: false},
+                    {val: 2, active: false},
+                    {val: 1, active: false},
+                    {val: 3, active: false},
+                ],
+                time: 1,
+                start: false,
+            }
+        },
+        methods: {
+            async bubbleSort() {
+                for (let i = 0; i < this.bubbleArr.length; i++) {
+                    for (let j = 0; j < this.bubbleArr.length - i - 1; j++) {
+                        await new Promise(resolve => {
+                            setTimeout(() => {
+                                this.dealState(this.bubbleArr, j, j + 1);
+                                if (this.bubbleArr[j].val > this.bubbleArr[j + 1].val) {
+                                    this.swap(this.bubbleArr, j, j + 1);
+                                    // [this.bubbleArr[j], this.bubbleArr[j + 1]] = [this.bubbleArr[j + 1], this.bubbleArr[j]]; 数组下标不是响应式
+                                    console.log(this.bubbleArr);
+                                }
+                                resolve();
+                            }, this.time * 1000);
+                        });
+                    }
+                }
+            },
+
+            async selectSort() {
+                for (let i = 0; i < this.selectArr.length; i++) {
+                    let max = 0;
+                    for (let j = 0; j < this.selectArr.length - i; j++) {
+                        await new Promise(resolve => {
+                            setTimeout(() => {
+                                this.dealState(this.selectArr, j, max)
+                                if (this.selectArr[j].val > this.selectArr[max].val) {
+                                    max = j;
+                                }
+                                // [this.selectArr[j], this.selectArr[j + 1]] = [this.selectArr[j + 1], this.selectArr[j]]; 数组下标不是响应式
+                                console.log(this.selectArr);
+                                resolve();
+                            }, this.time * 1000);
+                        });
+                    }
+                    setTimeout(() => {
+                        this.swap(this.selectArr, max, this.selectArr.length - 1 - i);
+                    }, 1000);
+                }
+            },
+
+            swap(arr, a, b) {
+                let t = arr[a].val;
+                Vue.set(arr[a], 'val', arr[b].val);
+                Vue.set(arr[b], 'val', t);
+            },
+
+            dealState(arr, a, b) {
+                arr.forEach(i => i.active = false);
+                arr[a].active = true;
+                arr[b].active = true;
+            }
+        },
+        created() {
+            this.bubbleSort();
+            this.selectSort();
+        },
+    });
+</script>
+</body>
+</html>
+
+
