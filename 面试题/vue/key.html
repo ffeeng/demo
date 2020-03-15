@@ -5,6 +5,99 @@
     <title>Title</title>
 </head>
 <body>
+<!--v-if v-for的原理-->
 
+<!--key可以用来表示唯一节点-->
+<!--数组下表作为key可能造成 vue.js:634 [Vue warn]: Duplicate keys detected: '0'. This may cause an update error.-->
+<div id="app">
+    {{show}}
+    <h1 v-if="show">render</h1>
+    <ul>
+        <li :key="i" v-for="i of 3">{{i}}</li>
+    </ul>
+    <comp-a v-model="show"></comp-a>
+    <comp-a :value.sync="show"></comp-a>
+</div>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    const compA = {
+        template: '<div>1</div>'
+    };
+    let vm = new Vue({
+        el: '#app',
+        components: {
+            compA
+        },
+        data() {
+            return {
+                show: true,
+            }
+        },
+    })
+</script>
+
+<script>
+    function createElement(
+        // context,
+        tag,
+        data,
+        children,
+        // normalizationType,
+        // alwaysNormalize
+    ) {
+    }
+
+    function renderList(
+        val,
+        render
+    ) {
+    }
+
+    function toString(val) {
+        return val == null
+            ? ''
+            : Array.isArray(val) || (isPlainObject(val) && val.toString === _toString)
+                ? JSON.stringify(val, null, 2)
+                : String(val)
+    }
+
+    function createTextVNode(val) {
+        return new VNode(undefined, undefined, undefined, String(val))
+    }
+
+    const _s = toString;
+    const _c = createElement;
+    const _l = renderList;
+    const _v = createTextVNode;
+
+    function f() {
+        with (this) {
+            return _c('div', {attrs: {"id": "app"}}, [
+                _v("\n    " + _s(show) + "\n    "),
+                (show) ? _c('h1', [_v("render")]) : _e(), _v(" "),
+                _c('ul', _l((3), function (i) {
+                    return _c('li', {key: i}, [_v(_s(i))])
+                }), 0),
+                _v(" "),
+                _c('comp-a', {
+                    model: {
+                        value: (show), callback: function ($$v) {
+                            show = $$v
+                        }, expression: "show"
+                    }
+                }),
+                _v(" "),
+                _c('comp-a', {
+                    attrs: {"value": show}, on: {
+                        "update:value": function ($event) {
+                            show = $event
+                        }
+                    }
+                })
+            ], 1)
+        }
+    }
+
+</script>
 </body>
 </html>

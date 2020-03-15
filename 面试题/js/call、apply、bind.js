@@ -48,3 +48,4 @@ Function.prototype.myBind = function (context) {
 };
 
 getValue.myBind(a)(['yck', '24']);
+// 多次band无效，band被棒死了

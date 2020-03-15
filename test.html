@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--腾讯面试题-->
+<script>
+    // A继承B
+    // Object.setPrototypeOf()
+    function inherit(A, B) {
+        let obj = B.prototype;
+        let keys = Object.getOwnPropertyNames(obj);
+        for (let key of keys) {
+            A.prototype.__proto__[key] = obj[key];
+        }
+    }
+
+    function deepClone(obj) {
+        if (obj == null) return;
+        if (typeof obj !== 'object') return obj;
+        if (obj instanceof Date) return new Date(obj);
+        if (obj instanceof RegExp) return new RegExp(obj);
+        if (Object.prototype.toString.call(obj).slice(8, -1) === 'Array') {
+            let res = [];
+            for (let i = 0; i < obj.length; i++) {
+                res[i] = deepClone(obj[i]);
+            }
+            return res;
+        } else {
+            let res = {};
+            for (let key in obj) {
+                res[key] = deepClone(obj[key]);
+            }
+            return res;
+        }
+    }
+</script>
+</body>
+</html>

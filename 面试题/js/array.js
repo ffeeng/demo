@@ -51,14 +51,14 @@ class MyArray {
 }
 
 
-Array.prototype._forEach = new MyArray()._forEach;
-Array.prototype._map = new MyArray()._map;
-Array.prototype._filter = new MyArray()._filter;
-Array.prototype._some = new MyArray()._some;
-Array.prototype._every = new MyArray()._every;
+// Array.prototype._forEach = new MyArray()._forEach;
+// Array.prototype._map = new MyArray()._map;
+// Array.prototype._filter = new MyArray()._filter;
+// Array.prototype._some = new MyArray()._some;
+// Array.prototype._every = new MyArray()._every;
 // reduce(callbackfn: (previousValue: T, currentValue: T, currentIndex: number, array: T[]) => T, initialValue: T): T;
 //reduce函数传入是个参数 pre cur index arr
-Array.prototype._reduce = new MyArray()._reduce;
+// Array.prototype._reduce = new MyArray()._reduce;
 // Array.prototype._forEach = new MyArray()._forEach;
 // [1, 2]._forEach((value, index, array) => console.log(value, index, array));
 // const a = [1, 2, 3]._reduce((pre, value, index, array) => {
@@ -66,9 +66,11 @@ Array.prototype._reduce = new MyArray()._reduce;
 // }, 0);
 // console.log(a);
 
-let a = new MyArray();
-a.
-for(let key in a.__proto__)
-    console.log(key);
-console.dir(a.__proto__)
-[].reduce()
+const keys = Object.getOwnPropertyNames(MyArray.prototype);
+keys.forEach(key => {
+    if(key!=='constructor'){
+        Array.prototype[key]=MyArray.prototype[key];
+    }
+});
+
+[1,2,3]._forEach(i=>console.log(i))

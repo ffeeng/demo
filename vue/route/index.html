@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h3>{{name}}</h3>
+    {{$route}}
+    <router-link to="/foo?a=1">foo</router-link>
+    <router-link to="/bar">bar</router-link>
+    <router-view></router-view>
+</div>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+
+
+<script>
+    const Foo = {template: '<div>foo{{$route.query}}</div>'};
+    const Bar = {template: '<div>bar</div>'};
+
+    const routes = [
+        {path: '/foo', component: Foo},
+        {path: '/bar', component: Bar}
+    ];
+    const router = new VueRouter({
+        routes // (缩写) 相当于 routes: routes
+    })
+    const vm = new Vue({
+        router,
+        el: '#app',
+        data() {
+            return {name: 'vue-router demo'}
+        },
+        methods: {
+            add() {
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

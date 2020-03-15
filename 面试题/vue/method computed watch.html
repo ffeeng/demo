@@ -11,5 +11,113 @@
 <!--method 调用方法-->
 <!--computed 计算属性用于页面渲染，有缓存-->
 <!--watch观察数据变化触发方法 异步-->
+
+<!--computed 基于watch lazy:true 基于脏值检测 修改后dirty为true，取值时dirty为true执行函数，不为ture返回-->
+<!--keyup.a if(a) null aaa()-->
+watch是发布订阅模式
+<!--computed的 lazy:true dirty:true基于脏值检测-->
+<script>
+
+    const _c = function (a, b, c, d) {
+        return createElement(vm, a, b, c, d, false);
+    }
+    const _v = function createTextVNode(val) {
+        return new VNode(undefined, undefined, undefined, String(val))
+    }
+    // $event.keyCode, "a", undefined, $event.key, undefined
+    const _k = function checkKeyCodes(
+        eventKeyCode,
+        key,
+        builtInKeyCode,
+        eventKeyName,
+        builtInKeyName
+    ) {
+        var mappedKeyCode = config.keyCodes[key] || builtInKeyCode;
+        if (builtInKeyName && eventKeyName && !config.keyCodes[key]) {
+            return isKeyNotMatch(builtInKeyName, eventKeyName)
+        } else if (mappedKeyCode) {
+            return isKeyNotMatch(mappedKeyCode, eventKeyCode)
+        } else if (eventKeyName) {
+            return hyphenate(eventKeyName) !== key
+        }
+    }
+    const _l = function renderList(
+        val,
+        render
+    ) {
+        var ret, i, l, keys, key;
+        if (Array.isArray(val) || typeof val === 'string') {
+            ret = new Array(val.length);
+            for (i = 0, l = val.length; i < l; i++) {
+                ret[i] = render(val[i], i);
+            }
+        } else if (typeof val === 'number') {
+            ret = new Array(val);
+            for (i = 0; i < val; i++) {
+                ret[i] = render(i + 1, i);
+            }
+        } else if (isObject(val)) {
+            if (hasSymbol && val[Symbol.iterator]) {
+                ret = [];
+                var iterator = val[Symbol.iterator]();
+                var result = iterator.next();
+                while (!result.done) {
+                    ret.push(render(result.value, ret.length));
+                    result = iterator.next();
+                }
+            } else {
+                keys = Object.keys(val);
+                ret = new Array(keys.length);
+                for (i = 0, l = keys.length; i < l; i++) {
+                    key = keys[i];
+                    ret[i] = render(val[key], key, i);
+                }
+            }
+        }
+        if (!isDef(ret)) {
+            ret = [];
+        }
+        (ret)._isVList = true;
+        return ret
+    }
+    const render = (function anonymous() {
+        with (this) {
+            return _c('div', {attrs: {"id": "app"}}, [_c('input',
+                {
+                    directives: [{
+                        name: "model",
+                        rawName: "v-model.string",
+                        value: (user),
+                        expression: "user",
+                        modifiers: {"string": true}
+                    }],
+                    staticClass: "aa",
+                    class: {title, content},
+                    style: ({background}),
+                    attrs: {"type": "text"},
+                    domProps: {"value": (user)},
+                    on: {
+                        "keyup": function ($event) {
+                            if (!$event.type.indexOf('key') && _k($event.keyCode, "a", undefined, $event.key, undefined)) return null;
+                            if (!$event.altKey) return null;
+                            return aaa($event)
+                        }, "input": function ($event) {
+                            if ($event.target.composing) return;
+                            user = $event.target.value
+                        }
+                    }
+                }), _v(" "), _l((arr), function (v, index) {
+                return _c('p', {key: index}, [_v(_s(v) + "==" + _s(index))])
+            })], 2)
+        }
+    })
+    vnode = render.call(vm._renderProxy, vm.$createElement);
+
+    function a() {
+        with (this) {
+            return _c('div', {attrs: {"id": "app"}}, [(title) ? _c('input', {attrs: {"type": "text"}}) : _e()])
+        }
+    }
+</script>
 </body>
 </html>
