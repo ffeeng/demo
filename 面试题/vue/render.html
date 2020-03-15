@@ -16,15 +16,26 @@
         el: '#app',
         render(h) {
             //h函数中的三个参数  h(tag,vnode,textNode}
-            return h('button', {
-                class: 'a b',
-                style: {width: '200px'},
-                on: {
-                    click: () => {
-                        state.count++
+            return h('div', [
+                h('button', {
+                    class: 'a b',
+                    style: {width: '200px', height: '30px'},
+                    on: {
+                        click: () => {
+                            state.count++
+                        }
                     }
-                }
-            }, `count is: ${state.count}`)
+                }),
+                h('button', {
+                    class: 'a b',
+                    style: {width: '200px', height: '30px'},
+                    on: {
+                        click: () => {
+                            state.count++
+                        }
+                    }
+                })
+            ])
         }
     })
 </script>
