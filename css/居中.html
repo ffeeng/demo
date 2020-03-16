@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .section {
+            /*可以用vh来指定高度*/
+            position: relative;
+            /*height: 100vh;*/
+            width: 400px;
+            height: 400px;
+            background: #1c2431;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+
+        .type1-absolute .box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .type2-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .type3-grid {
+            display: grid;
+        }
+
+        .type3-grid .box {
+            align-self: center;
+            justify-self: center;
+        }
+
+
+        .type4-grid-margin {
+            display: grid;
+        }
+
+        .type4-grid-margin .box {
+            /* position: relative; */
+            margin: auto;
+        }
+
+        .type5-grid-place {
+            display: grid;
+            place-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<div style="padding: 100px;">
+    <h3>五中方式实现div居中</h3>
+    <ul style="margin:20px ;">
+        <li>type1-absolute</li>
+        <li>type2-flex</li>
+        <li>type3-grid</li>
+        <li>type4-grid-margin</li>
+        <li>type5-grid-place</li>
+    </ul>
+    <div class="type1-absolute section">
+        <div class="box">
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
