@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<style>
+    .parent {
+        /*overflow: scroll;scroll*/
+        width: 300px;
+        min-height: 102px;
+        border: 1px solid red;
+        display: flex;
+    }
+
+    .child {
+        width: 50px;
+        height: 50px;
+        border: 1px solid green;
+    }
+    .child:nth-of-type(2){
+        width:70px;
+    }
+    .child:nth-of-type(3){
+        height:70px;
+    }
+
+    .demo {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .demo > div {
+        margin: 0 5px;
+    }
+
+    .alignItems .child:first-child {
+        height: 30px;
+    }
+
+    .alignItems .child:last-child {
+        height: 70px;
+    }
+
+    .alignContent .parent {
+        flex-wrap: wrap;
+        height: 200px;
+    }
+
+    .alignContent .child {
+        flex-shrink: 0;
+        width: 90px;
+    }
+
+    .alignContent .child:nth-of-type(2) {
+        height: 30px;
+    }
+
+    .alignContent .child:nth-of-type(3) {
+        height: 70px;
+    }
+
+    .alignContent .child:nth-of-type(5) {
+        height: 60px;
+    }
+
+    .demoChild .parent {
+        width: 600px;
+    }
+
+    .demoChild .child {
+        width: 100px;
+    }
+
+    .alignSelf .child:last-child {
+        height: auto;
+    }
+
+    .flexShrink .parent{
+        width:200px
+    }
+
+
+</style>
+
+
+<div id="app">
+
+    <h2>父容器属性</h2>
+    <div v-for="(item,key) of parent">
+        <h4>{{key}}</h4>
+        <div :class="{[key]:true,demo:true}">
+            <div v-for="(value,index) of item">
+                <span> {{value}}</span>
+                <div class="parent" :style="{[key]:value}">
+                    <div class="child" v-for="i of num[key]">{{i}}</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>子容器属性</h2>
+    <div class="demoChild demo">
+        <div :class="{[key]:true}" v-for="(item,key) of child">
+            <h4>{{key}}</h4>
+            <div class="parent">
+                <div class="child" v-for="(value,index) of item" :style="{[key]:value}">
+                    {{value}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                num:{
+                    flexDirection:3,
+                    justifyContent: 3,
+                    alignItems:3,
+                    alignContent:6,
+                    flexWrap:9,
+                    alignSelf:6,
+                    order:4,
+                    flexShrink: 3,
+                    flexGrow: 3,
+                    flexBasis: 3,
+                },
+                parent: {
+                    flexDirection: [
+                        'row',
+                        'row-reverse',
+                        'column',
+                        'column-reverse',
+                    ],
+                    justifyContent: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'space-between',
+                        'space-around',
+                    ],
+                    alignItems: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'baseline',
+                        'stretch'
+                    ],
+                    alignContent: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'space-between',
+                        'space-around',
+                        'stretch'
+                    ],
+                    flexWrap: [
+                        'nowrap',
+                        'wrap',
+                        'wrap-reverse'
+                    ]
+                },
+
+                child: {
+                    alignSelf: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'baseline',
+                        'stretch'
+                    ],
+                    order: [
+                        3, 1, 2, -1
+                    ],
+                    flexShrink:[
+                        'initial',0,1
+                    ],
+                    flexGrow:[
+                        'initial',0,1
+                    ],
+                    flexBasis:[
+                        'initial','100px','200px','300px'
+                    ]
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

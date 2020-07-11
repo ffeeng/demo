@@ -26,6 +26,24 @@ function debounce(func, wait = 50) {
 // setTimeout(() => {
 //     log(1);
 // }, 2000);
+function debounce(fn, wait) {
+    let lastTime = new Date().getTime();
+    let timeId;
+
+    return function (...args) {
+        let curTime = new Date().getTime();
+        if (curTime - lastTime > wait) {
+            timeId = setTimeout(() => {
+                lastTime = curTime;
+                fn.apply(args)
+            }, wait)
+        } else {
+            clearTimeout(timeId);
+        }
+
+    }
+
+}
 
 function throttle(func, wait) {
     let pre = Date.now();

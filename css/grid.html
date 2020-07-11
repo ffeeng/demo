@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<style>
+    .wrap{
+        display: grid;
+        height: 600px;
+        width: 600px;
+        margin: 50px auto;
+        /* 用auto的话会导致大小不一致, 因为auto算是自适应里面的宽高 */
+        grid-template-columns: repeat(15,1fr);
+        grid-template-rows: repeat(15,1fr);
+        justify-items: stretch;
+        align-items: stretch;
+        grid-template-areas:
+                ". . . . . a a a a a . . . . . "
+                ". . . b b f1 f1 f1 f1 f1 c c . . . "
+                ". . d g5 g5 f1 f1 f1 f1 f1 f2 f2 e . . "
+                ". f g4 g4 g4 f1 f1 f1 f1 f1 f4 f4 f4 g . "
+                ". f g4 g4 g4 f1 f1 f1 f1 f1 f4 f4 f4 g . "
+                "h g3 g4 g4 g4 f1 f1 f1 f1 f1 f4 f4 f4 f3 i "
+                "h g3 g2 q q f1 f1 f1 f1 f1 r r r f3 i "
+                "h g3 g2 q q f1 f1 f1 f1 f1 f6 f6 f5 f3 i "
+                "h g3 g2 f9 f9 f1 f1 f1 f1 f1 f6 f6 f5 f3 i "
+                "h g3 g2 f9 f9 f1 f1 f1 f1 f1 f6 f6 f5 f3 i "
+                ". j g2 f9 f9 g1 s s s f7 f6 f6 f5 p ."
+                ". j g2 f9 f9 f8 f8 f8 f8 f7 f6 f6 f5 p . "
+                ". . k f9 f9 f8 f8 f8 f8 f7 f6 f6 o . . "
+                ". . . m m f8 f8 f8 f8 f7 n n . . . "
+                ". . . . . l l l l l . . . . . "
+    ;
+    }
+    .box {
+        background-color: black;
+    }
+    .box-a{
+        grid-area: a;
+    }
+    .box-b{
+        grid-area: b;
+    }
+    .box-c{
+        grid-area: c;
+    }
+    .box-d{
+        grid-area: d;
+    }
+    .box-e{
+        grid-area: e;
+    }
+    .box-f{
+        grid-area: f;
+    }
+    .box-g{
+        grid-area: g;
+    }
+    .box-h{
+        grid-area: h;
+    }
+    .box-i{
+        grid-area: i;
+    }
+    .box-j{
+        grid-area: j;
+    }
+    .box-k{
+        grid-area: k;
+    }
+    .box-l{
+        grid-area: l;
+    }
+    .box-m{
+        grid-area: m;
+    }
+    .box-n{
+        grid-area: n;
+    }
+    .box-o{
+        grid-area: o;
+    }
+    .box-p{
+        grid-area: p;
+    }
+    .box-q{
+        grid-area: q;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(255, 206, 46);
+    }
+    .box-q::after{
+        content: '';
+        display: block;
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        background-color: red;
+    }
+    .box-r{
+        grid-area: r;
+    }
+    .box-s{
+        grid-area: s;
+    }
+    .box-t{
+        grid-area: t;
+    }
+    .f{
+        background-color: rgb(251, 209, 71);
+    }
+    .f1{
+        grid-area: f1;
+    }
+    .f2{
+        grid-area: f2;
+    }
+    .f3{
+        grid-area: f3;
+    }
+    .f4{
+        grid-area: f4;
+    }
+    .f5{
+        grid-area: f5;
+    }
+    .f6{
+        grid-area: f6;
+    }
+    .f7{
+        grid-area: f7;
+    }
+    .f8{
+        grid-area: f8;
+    }
+    .f9{
+        grid-area: f9;
+    }
+    .g1{
+        grid-area: g1;
+    }
+    .g2{
+        grid-area: g2;
+    }
+    .g3{
+        grid-area: g3;
+    }
+    .g4{
+        grid-area: g4;
+    }
+
+    .g5{
+        grid-area: g5;
+    }
+    .g6{
+        grid-area: g6;
+    }
+</style>
+</head>
+<body>
+<!-- 采用3个dom拼接,或者采用拼图板, 拼图更能体现grid布局的又优势 -->
+<div class="wrap">
+    <div class="box box-a"> v </div>
+    <div class="box box-b"> v </div>
+    <div class="box box-c"> v </div>
+    <div class="box box-d"> v </div>
+    <div class="box box-e"> v </div>
+    <div class="box box-f"> v </div>
+    <div class="box box-g"> v </div>
+    <div class="box box-h"> v </div>
+    <div class="box box-i"> v </div>
+    <div class="box box-j"> v </div>
+    <div class="box box-k"> v </div>
+    <div class="box box-l"> v </div>
+    <div class="box box-m"> v </div>
+    <div class="box box-n"> v </div>
+    <div class="box box-o"> v </div>
+    <div class="box box-p"> v </div>
+    <div class="box box-q">  </div>
+    <div class="box box-r"> v </div>
+    <div class="box box-s"> v </div>
+    <!-- 肤色 -->
+    <div class="f f1"></div>
+    <div class="f f2"></div>
+    <div class="f f3"></div>
+    <div class="f f4"></div>
+    <div class="f f5"></div>
+    <div class="f f6"></div>
+    <div class="f f7"></div>
+    <div class="f f8"></div>
+    <div class="f f9"></div>
+    <div class="f g1"></div>
+    <div class="f g2"></div>
+    <div class="f g3"></div>
+    <div class="f g4"></div>
+    <div class="f g5"></div>
+    <div class="f g6"></div>
+</div>
+</body>
+
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                num:{
+                    flexDirection:3,
+                    justifyContent: 3,
+                    alignItems:3,
+                    alignContent:6,
+                    flexWrap:9,
+                    alignSelf:6,
+                    order:4,
+                    flexShrink: 3,
+                    flexGrow: 3,
+                    flexBasis: 3,
+                },
+                parent: {
+                    flexDirection: [
+                        'row',
+                        'row-reverse',
+                        'column',
+                        'column-reverse',
+                    ],
+                    justifyContent: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'space-between',
+                        'space-around',
+                    ],
+                    alignItems: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'baseline',
+                        'stretch'
+                    ],
+                    alignContent: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'space-between',
+                        'space-around',
+                        'stretch'
+                    ],
+                    flexWrap: [
+                        'nowrap',
+                        'wrap',
+                        'wrap-reverse'
+                    ]
+                },
+
+                child: {
+                    alignSelf: [
+                        'flex-start',
+                        'flex-end',
+                        'center',
+                        'baseline',
+                        'stretch'
+                    ],
+                    order: [
+                        3, 1, 2, -1
+                    ],
+                    flexShrink:[
+                        'initial',0,1
+                    ],
+                    flexGrow:[
+                        'initial',0,1
+                    ],
+                    flexBasis:[
+                        'initial','100px','200px','300px'
+                    ]
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

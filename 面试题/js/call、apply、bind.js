@@ -1,17 +1,8 @@
-let a = {
-    value: 1,
-    say() {
-        console.log('hello');
-    }
-};
 
-function getValue(name, age) {
-    console.log(arguments);
-    console.log(name)
-    console.log(age)
-    console.log(this.value)
-    this.say();
-    return 2;
+function  say(...args) {
+    console.log(args)
+    console.log(this.name,this.age)
+
 }
 
 // getValue.call(a, 'yck', '24');
@@ -35,17 +26,17 @@ Function.prototype.myApply = function (context, args) {
     delete context.fn;
     return res;
 };
+let obj = {name:'feng',age:20};
 
-
-// let res = getValue.myApply(a, ['feng', 20]);
+let res = say.myApply(obj, ['feng', 20]);
 // console.log(res);
 
 Function.prototype.myBind = function (context) {
     let _this = this; //_this = getValue
     return function (...args) {
-        _this.myApply(context, ...args);
+        _this.myApply(context, args);
     }
 };
 
-getValue.myBind(a)(['yck', '24']);
+say.myBind(obj)(['yck', '24']);
 // 多次band无效，band被棒死了
